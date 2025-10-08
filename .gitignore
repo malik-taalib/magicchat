@@ -1,0 +1,57 @@
+# ---- Global ----
+.DS_Store
+Thumbs.db
+*.log
+logs/
+tmp/
+.cache/
+.env
+.env.*
+!.env.example
+*.bak
+*.swp
+*.swo
+
+# ---- Node / Next.js ----
+node_modules/
+.next/
+out/
+.turbo/
+.vercel/
+.swc/
+.eslintcache
+.npm/
+.yarn/
+
+# ---- Build outputs ----
+dist/
+build/
+coverage/
+*.out
+
+# ---- Go ----
+bin/
+tmp/
+*.exe
+*.test
+backend/main
+backend/server
+vendor/
+.air.toml
+
+# ---- IDE / Editor ----
+.vscode/
+.idea/
+*.iml
+*.sublime-workspace
+*.sublime-project
+
+# ---- Docker / Compose ----
+docker-compose.override.yml
+*.tar
+Dockerfile.dev
+
+# ---- OS files ----
+ehthumbs.db
+Icon?
+desktop.ini
