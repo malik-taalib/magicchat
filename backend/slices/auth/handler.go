@@ -90,6 +90,28 @@ func (h *Handler) Me(w http.ResponseWriter, r *http.Request) {
 	respondSuccess(w, http.StatusOK, user)
 }
 
+func (h *Handler) UpdateProfile(w http.ResponseWriter, r *http.Request) {
+	userID, ok := GetUserIDFromContext(r.Context())
+	if !ok {
+		respondError(w, http.StatusUnauthorized, "unauthorized")
+		return
+	}
+
+	var req UpdateProfileRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		respondError(w, http.StatusBadRequest, "invalid request body")
+		return
+	}
+
+	user, err := h.service.UpdateProfile(r.Context(), userID, &req)
+	if err != nil {
+		respondError(w, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	respondSuccess(w, http.StatusOK, user)
+}
+
 // Helper functions
 func generateJWT(userID, username string) (string, error) {
 	cfg := config.Load()

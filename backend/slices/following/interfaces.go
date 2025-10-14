@@ -17,4 +17,5 @@ type RepositoryInterface interface {
 	GetFollowerCount(ctx context.Context, userID primitive.ObjectID) (int, error)
 	GetFollowingCount(ctx context.Context, userID primitive.ObjectID) (int, error)
 	GetUserByID(ctx context.Context, userID primitive.ObjectID) (*UserProfile, error)
+	GetLikedVideos(ctx context.Context, userID primitive.ObjectID, limit, offset int64) ([]*FeedVideo, error)
 }

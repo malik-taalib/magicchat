@@ -1,0 +1,502 @@
+{
+  "users": [
+    {
+      "_id": "user_001",
+      "username": "sarah_adventures",
+      "email": "sarah@magicchat.com",
+      "password_hash": "$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy",
+      "display_name": "Sarah Adventures",
+      "bio": "🌍 Travel vlogger | 📸 Photography | ✨ Living my best life",
+      "avatar_url": "https://i.pravatar.cc/300?img=1",
+      "follower_count": 15420,
+      "following_count": 342,
+      "video_count": 127,
+      "total_likes": 245800,
+      "created_at": "2024-01-15T10:30:00Z",
+      "updated_at": "2024-10-13T12:00:00Z"
+    },
+    {
+      "_id": "user_002",
+      "username": "chef_mike",
+      "email": "mike@magicchat.com",
+      "password_hash": "$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy",
+      "display_name": "Chef Mike",
+      "bio": "👨‍🍳 Professional Chef | 🍜 Quick recipes | DM for collabs",
+      "avatar_url": "https://i.pravatar.cc/300?img=12",
+      "follower_count": 28900,
+      "following_count": 145,
+      "video_count": 203,
+      "total_likes": 567300,
+      "created_at": "2024-02-01T08:15:00Z",
+      "updated_at": "2024-10-13T12:00:00Z"
+    },
+    {
+      "_id": "user_003",
+      "username": "fitness_emma",
+      "email": "emma@magicchat.com",
+      "password_hash": "$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy",
+      "display_name": "Emma Fitness",
+      "bio": "💪 Certified trainer | 🏋️‍♀️ Home workouts | Transform your body!",
+      "avatar_url": "https://i.pravatar.cc/300?img=5",
+      "follower_count": 45200,
+      "following_count": 89,
+      "video_count": 356,
+      "total_likes": 892400,
+      "created_at": "2024-01-10T06:00:00Z",
+      "updated_at": "2024-10-13T12:00:00Z"
+    },
+    {
+      "_id": "user_004",
+      "username": "comedy_jay",
+      "email": "jay@magicchat.com",
+      "password_hash": "$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy",
+      "display_name": "Jay Comedy",
+      "bio": "😂 Making you laugh daily | 🎭 Comedian | Follow for daily dose of humor",
+      "avatar_url": "https://i.pravatar.cc/300?img=15",
+      "follower_count": 67800,
+      "following_count": 234,
+      "video_count": 489,
+      "total_likes": 1245600,
+      "created_at": "2023-12-05T14:20:00Z",
+      "updated_at": "2024-10-13T12:00:00Z"
+    },
+    {
+      "_id": "user_005",
+      "username": "tech_alex",
+      "email": "alex@magicchat.com",
+      "password_hash": "$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy",
+      "display_name": "Tech Alex",
+      "bio": "💻 Software Engineer | 📱 Tech reviews | 🚀 Latest gadgets",
+      "avatar_url": "https://i.pravatar.cc/300?img=8",
+      "follower_count": 32100,
+      "following_count": 412,
+      "video_count": 178,
+      "total_likes": 456700,
+      "created_at": "2024-03-12T09:45:00Z",
+      "updated_at": "2024-10-13T12:00:00Z"
+    },
+    {
+      "_id": "user_006",
+      "username": "music_lisa",
+      "email": "lisa@magicchat.com",
+      "password_hash": "$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy",
+      "display_name": "Lisa Music",
+      "bio": "🎵 Singer | 🎸 Guitar covers | 🎤 Original songs",
+      "avatar_url": "https://i.pravatar.cc/300?img=9",
+      "follower_count": 89400,
+      "following_count": 567,
+      "video_count": 234,
+      "total_likes": 1678900,
+      "created_at": "2023-11-20T16:30:00Z",
+      "updated_at": "2024-10-13T12:00:00Z"
+    },
+    {
+      "_id": "user_007",
+      "username": "art_marcus",
+      "email": "marcus@magicchat.com",
+      "password_hash": "$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy",
+      "display_name": "Marcus Art",
+      "bio": "🎨 Digital artist | ✏️ Drawing tutorials | 🖼️ Commissions open",
+      "avatar_url": "https://i.pravatar.cc/300?img=13",
+      "follower_count": 21500,
+      "following_count": 289,
+      "video_count": 145,
+      "total_likes": 334500,
+      "created_at": "2024-04-08T11:00:00Z",
+      "updated_at": "2024-10-13T12:00:00Z"
+    },
+    {
+      "_id": "user_008",
+      "username": "dance_nina",
+      "email": "nina@magicchat.com",
+      "password_hash": "$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy",
+      "display_name": "Nina Dance",
+      "bio": "💃 Professional dancer | 🩰 Choreography | Join my dance challenges!",
+      "avatar_url": "https://i.pravatar.cc/300?img=20",
+      "follower_count": 54300,
+      "following_count": 178,
+      "video_count": 412,
+      "total_likes": 987600,
+      "created_at": "2024-02-14T13:15:00Z",
+      "updated_at": "2024-10-13T12:00:00Z"
+    }
+  ],
+  "videos": [
+    {
+      "_id": "video_001",
+      "user_id": "user_001",
+      "title": "Sunset in Santorini",
+      "description": "The most beautiful sunset I've ever seen! 🌅 #travel #greece #santorini",
+      "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "thumbnail_url": "https://picsum.photos/400/600?random=1",
+      "duration": 30,
+      "hashtags": ["travel", "greece", "santorini", "sunset"],
+      "view_count": 45230,
+      "like_count": 3421,
+      "comment_count": 234,
+      "share_count": 156,
+      "processing_status": "completed",
+      "created_at": "2024-10-10T14:30:00Z",
+      "updated_at": "2024-10-13T12:00:00Z"
+    },
+    {
+      "_id": "video_002",
+      "user_id": "user_002",
+      "title": "30-Second Pasta Recipe",
+      "description": "Quick and delicious pasta hack! 🍝 #cooking #recipe #pasta #quickmeals",
+      "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+      "thumbnail_url": "https://picsum.photos/400/600?random=2",
+      "duration": 45,
+      "hashtags": ["cooking", "recipe", "pasta", "quickmeals"],
+      "view_count": 128450,
+      "like_count": 8932,
+      "comment_count": 567,
+      "share_count": 892,
+      "processing_status": "completed",
+      "created_at": "2024-10-11T10:15:00Z",
+      "updated_at": "2024-10-13T12:00:00Z"
+    },
+    {
+      "_id": "video_003",
+      "user_id": "user_003",
+      "title": "5-Min Ab Workout",
+      "description": "Burn those abs! No equipment needed 💪 #fitness #workout #abs #homeworkout",
+      "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+      "thumbnail_url": "https://picsum.photos/400/600?random=3",
+      "duration": 60,
+      "hashtags": ["fitness", "workout", "abs", "homeworkout"],
+      "view_count": 234560,
+      "like_count": 15678,
+      "comment_count": 1234,
+      "share_count": 2341,
+      "processing_status": "completed",
+      "created_at": "2024-10-12T07:00:00Z",
+      "updated_at": "2024-10-13T12:00:00Z"
+    },
+    {
+      "_id": "video_004",
+      "user_id": "user_004",
+      "title": "When you forget your password",
+      "description": "We've all been there 😂 #comedy #funny #relatable #humor",
+      "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+      "thumbnail_url": "https://picsum.photos/400/600?random=4",
+      "duration": 25,
+      "hashtags": ["comedy", "funny", "relatable", "humor"],
+      "view_count": 567890,
+      "like_count": 34567,
+      "comment_count": 2345,
+      "share_count": 4567,
+      "processing_status": "completed",
+      "created_at": "2024-10-12T16:45:00Z",
+      "updated_at": "2024-10-13T12:00:00Z"
+    },
+    {
+      "_id": "video_005",
+      "user_id": "user_005",
+      "title": "iPhone 15 Pro Review",
+      "description": "Is it worth the upgrade? 📱 #tech #iphone #review #apple",
+      "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+      "thumbnail_url": "https://picsum.photos/400/600?random=5",
+      "duration": 90,
+      "hashtags": ["tech", "iphone", "review", "apple"],
+      "view_count": 89234,
+      "like_count": 5678,
+      "comment_count": 789,
+      "share_count": 456,
+      "processing_status": "completed",
+      "created_at": "2024-10-11T12:30:00Z",
+      "updated_at": "2024-10-13T12:00:00Z"
+    },
+    {
+      "_id": "video_006",
+      "user_id": "user_006",
+      "title": "Acoustic Cover - Perfect",
+      "description": "Ed Sheeran cover 🎸 Hope you like it! #music #cover #guitar #singing",
+      "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+      "thumbnail_url": "https://picsum.photos/400/600?random=6",
+      "duration": 120,
+      "hashtags": ["music", "cover", "guitar", "singing"],
+      "view_count": 456789,
+      "like_count": 28934,
+      "comment_count": 1567,
+      "share_count": 3421,
+      "processing_status": "completed",
+      "created_at": "2024-10-10T18:00:00Z",
+      "updated_at": "2024-10-13T12:00:00Z"
+    },
+    {
+      "_id": "video_007",
+      "user_id": "user_007",
+      "title": "Speed Drawing a Portrait",
+      "description": "Watch me draw in 60 seconds ✏️ #art #drawing #timelapse #artist",
+      "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
+      "thumbnail_url": "https://picsum.photos/400/600?random=7",
+      "duration": 60,
+      "hashtags": ["art", "drawing", "timelapse", "artist"],
+      "view_count": 67890,
+      "like_count": 4567,
+      "comment_count": 345,
+      "share_count": 234,
+      "processing_status": "completed",
+      "created_at": "2024-10-12T09:20:00Z",
+      "updated_at": "2024-10-13T12:00:00Z"
+    },
+    {
+      "_id": "video_008",
+      "user_id": "user_008",
+      "title": "Hip Hop Dance Tutorial",
+      "description": "Learn this move! 💃 #dance #hiphop #tutorial #dancechallenge",
+      "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
+      "thumbnail_url": "https://picsum.photos/400/600?random=8",
+      "duration": 75,
+      "hashtags": ["dance", "hiphop", "tutorial", "dancechallenge"],
+      "view_count": 345678,
+      "like_count": 23456,
+      "comment_count": 1234,
+      "share_count": 2345,
+      "processing_status": "completed",
+      "created_at": "2024-10-11T15:40:00Z",
+      "updated_at": "2024-10-13T12:00:00Z"
+    },
+    {
+      "_id": "video_009",
+      "user_id": "user_001",
+      "title": "Tokyo Street Food Tour",
+      "description": "Amazing food in Tokyo! 🍜 #travel #japan #tokyo #foodie",
+      "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4",
+      "thumbnail_url": "https://picsum.photos/400/600?random=9",
+      "duration": 50,
+      "hashtags": ["travel", "japan", "tokyo", "foodie"],
+      "view_count": 98765,
+      "like_count": 6789,
+      "comment_count": 456,
+      "share_count": 567,
+      "processing_status": "completed",
+      "created_at": "2024-10-09T11:00:00Z",
+      "updated_at": "2024-10-13T12:00:00Z"
+    },
+    {
+      "_id": "video_010",
+      "user_id": "user_002",
+      "title": "Perfect Steak Every Time",
+      "description": "Restaurant quality at home! 🥩 #cooking #steak #recipe #howto",
+      "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
+      "thumbnail_url": "https://picsum.photos/400/600?random=10",
+      "duration": 40,
+      "hashtags": ["cooking", "steak", "recipe", "howto"],
+      "view_count": 156789,
+      "like_count": 10234,
+      "comment_count": 789,
+      "share_count": 1234,
+      "processing_status": "completed",
+      "created_at": "2024-10-10T13:25:00Z",
+      "updated_at": "2024-10-13T12:00:00Z"
+    },
+    {
+      "_id": "video_011",
+      "user_id": "user_003",
+      "title": "Morning Yoga Routine",
+      "description": "Start your day right 🧘‍♀️ #yoga #morning #fitness #wellness",
+      "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4",
+      "thumbnail_url": "https://picsum.photos/400/600?random=11",
+      "duration": 55,
+      "hashtags": ["yoga", "morning", "fitness", "wellness"],
+      "view_count": 178234,
+      "like_count": 12456,
+      "comment_count": 890,
+      "share_count": 1567,
+      "processing_status": "completed",
+      "created_at": "2024-10-09T06:30:00Z",
+      "updated_at": "2024-10-13T12:00:00Z"
+    },
+    {
+      "_id": "video_012",
+      "user_id": "user_004",
+      "title": "When you're on a video call",
+      "description": "Working from home be like 😂 #comedy #wfh #relatable #funny",
+      "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
+      "thumbnail_url": "https://picsum.photos/400/600?random=12",
+      "duration": 35,
+      "hashtags": ["comedy", "wfh", "relatable", "funny"],
+      "view_count": 678901,
+      "like_count": 45678,
+      "comment_count": 3456,
+      "share_count": 5678,
+      "processing_status": "completed",
+      "created_at": "2024-10-11T14:00:00Z",
+      "updated_at": "2024-10-13T12:00:00Z"
+    }
+  ],
+  "comments": [
+    {
+      "_id": "comment_001",
+      "user_id": "user_002",
+      "video_id": "video_001",
+      "text": "Wow! This is absolutely stunning! 😍",
+      "likes": 45,
+      "created_at": "2024-10-10T15:30:00Z"
+    },
+    {
+      "_id": "comment_002",
+      "user_id": "user_003",
+      "video_id": "video_001",
+      "text": "Adding this to my bucket list!",
+      "likes": 23,
+      "created_at": "2024-10-10T16:00:00Z"
+    },
+    {
+      "_id": "comment_003",
+      "user_id": "user_001",
+      "video_id": "video_002",
+      "text": "I tried this and it's amazing! Thanks!",
+      "likes": 67,
+      "created_at": "2024-10-11T11:00:00Z"
+    },
+    {
+      "_id": "comment_004",
+      "user_id": "user_004",
+      "video_id": "video_002",
+      "text": "Chef Mike never disappoints! 👨‍🍳",
+      "likes": 89,
+      "created_at": "2024-10-11T12:30:00Z"
+    },
+    {
+      "_id": "comment_005",
+      "user_id": "user_005",
+      "video_id": "video_003",
+      "text": "Just did this workout, I'm dying 😂💪",
+      "likes": 156,
+      "created_at": "2024-10-12T08:00:00Z"
+    },
+    {
+      "_id": "comment_006",
+      "user_id": "user_006",
+      "video_id": "video_004",
+      "text": "This is literally me every day! 😂😂😂",
+      "likes": 234,
+      "created_at": "2024-10-12T17:00:00Z"
+    },
+    {
+      "_id": "comment_007",
+      "user_id": "user_007",
+      "video_id": "video_004",
+      "text": "Why is this so accurate?! 🤣",
+      "likes": 178,
+      "created_at": "2024-10-12T18:15:00Z"
+    },
+    {
+      "_id": "comment_008",
+      "user_id": "user_008",
+      "video_id": "video_006",
+      "text": "Your voice is angelic! 🎵",
+      "likes": 312,
+      "created_at": "2024-10-10T19:00:00Z"
+    }
+  ],
+  "likes": [
+    {
+      "_id": "like_001",
+      "user_id": "user_002",
+      "video_id": "video_001",
+      "created_at": "2024-10-10T14:35:00Z"
+    },
+    {
+      "_id": "like_002",
+      "user_id": "user_003",
+      "video_id": "video_001",
+      "created_at": "2024-10-10T15:00:00Z"
+    },
+    {
+      "_id": "like_003",
+      "user_id": "user_004",
+      "video_id": "video_002",
+      "created_at": "2024-10-11T10:30:00Z"
+    },
+    {
+      "_id": "like_004",
+      "user_id": "user_005",
+      "video_id": "video_003",
+      "created_at": "2024-10-12T07:15:00Z"
+    },
+    {
+      "_id": "like_005",
+      "user_id": "user_001",
+      "video_id": "video_004",
+      "created_at": "2024-10-12T16:50:00Z"
+    }
+  ],
+  "follows": [
+    {
+      "_id": "follow_001",
+      "follower_id": "user_001",
+      "following_id": "user_002",
+      "created_at": "2024-10-01T10:00:00Z"
+    },
+    {
+      "_id": "follow_002",
+      "follower_id": "user_001",
+      "following_id": "user_003",
+      "created_at": "2024-10-02T11:00:00Z"
+    },
+    {
+      "_id": "follow_003",
+      "follower_id": "user_002",
+      "following_id": "user_001",
+      "created_at": "2024-10-03T12:00:00Z"
+    },
+    {
+      "_id": "follow_004",
+      "follower_id": "user_003",
+      "following_id": "user_001",
+      "created_at": "2024-10-04T13:00:00Z"
+    },
+    {
+      "_id": "follow_005",
+      "follower_id": "user_004",
+      "following_id": "user_006",
+      "created_at": "2024-10-05T14:00:00Z"
+    }
+  ],
+  "hashtags": [
+    {
+      "_id": "hashtag_001",
+      "tag": "travel",
+      "video_count": 234,
+      "trending_score": 8.5,
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-10-13T12:00:00Z"
+    },
+    {
+      "_id": "hashtag_002",
+      "tag": "cooking",
+      "video_count": 567,
+      "trending_score": 9.2,
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-10-13T12:00:00Z"
+    },
+    {
+      "_id": "hashtag_003",
+      "tag": "fitness",
+      "video_count": 892,
+      "trending_score": 9.8,
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-10-13T12:00:00Z"
+    },
+    {
+      "_id": "hashtag_004",
+      "tag": "comedy",
+      "video_count": 1234,
+      "trending_score": 9.9,
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-10-13T12:00:00Z"
+    },
+    {
+      "_id": "hashtag_005",
+      "tag": "music",
+      "video_count": 678,
+      "trending_score": 8.7,
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-10-13T12:00:00Z"
+    }
+  ]
+}

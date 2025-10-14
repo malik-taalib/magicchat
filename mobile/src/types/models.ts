@@ -1,7 +1,7 @@
 // Data models matching the backend API
 
 export interface User {
-  _id: string;
+  id: string; // Backend returns "id" not "_id"
   username: string;
   email: string;
   display_name: string;
@@ -16,8 +16,11 @@ export interface User {
 }
 
 export interface Video {
-  _id: string;
+  id: string; // Backend uses "id" not "_id" for feed videos
   user_id: string;
+  username: string;
+  display_name: string;
+  avatar_url: string;
   title: string;
   description: string;
   video_url: string;

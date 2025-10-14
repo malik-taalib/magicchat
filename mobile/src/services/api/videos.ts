@@ -26,25 +26,25 @@ export const videosApi = {
   },
 
   async likeVideo(videoId: string): Promise<void> {
-    await apiClient.post(`/api/videos/${videoId}/like`);
+    await apiClient.post(`/api/engage/${videoId}/like`);
   },
 
   async unlikeVideo(videoId: string): Promise<void> {
-    await apiClient.delete(`/api/videos/${videoId}/like`);
+    await apiClient.delete(`/api/engage/${videoId}/like`);
   },
 
   async getComments(videoId: string, cursor?: string): Promise<any> {
     const params = cursor ? { cursor } : {};
-    const response = await apiClient.get(`/api/videos/${videoId}/comments`, { params });
+    const response = await apiClient.get(`/api/engage/${videoId}/comments`, { params });
     return response.data.data;
   },
 
   async addComment(videoId: string, text: string): Promise<any> {
-    const response = await apiClient.post(`/api/videos/${videoId}/comments`, { text });
+    const response = await apiClient.post(`/api/engage/${videoId}/comments`, { text });
     return response.data.data;
   },
 
   async shareVideo(videoId: string): Promise<void> {
-    await apiClient.post(`/api/videos/${videoId}/share`);
+    await apiClient.post(`/api/engage/${videoId}/share`);
   },
 };

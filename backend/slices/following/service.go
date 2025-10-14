@@ -219,3 +219,32 @@ func (s *Service) GetUserProfile(ctx context.Context, userID string) (*UserProfi
 
 	return s.repo.GetUserByID(ctx, userObjID)
 }
+
+// GetLikedVideos returns a paginated list of videos that a user has liked
+func (s *Service) GetLikedVideos(ctx context.Context, userID string, limit, offset int64) ([]*FeedVideo, error) {
+	// Validate user ID
+	userObjID, err := primitive.ObjectIDFromHex(userID)
+	if err != nil {
+		return nil, errors.New("invalid user ID")
+	}
+
+	// Validate pagination parameters
+	if limit <= 0 {
+		limit = 20 // Default limit
+	}
+	if limit > 100 {
+		limit = 100 // Max limit
+	}
+	if offset < 0 {
+		offset = 0
+	}
+
+	// Check if user exists
+	_, err = s.repo.GetUserByID(ctx, userObjID)
+	if err != nil {
+		return nil, errors.New("user not found")
+	}
+
+	// Get liked videos
+	return s.repo.GetLikedVideos(ctx, userObjID, limit, offset)
+}

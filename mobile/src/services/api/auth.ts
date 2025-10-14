@@ -18,6 +18,12 @@ interface AuthResponse {
   user: any;
 }
 
+interface UpdateProfileData {
+  display_name?: string;
+  bio?: string;
+  avatar_url?: string;
+}
+
 export const authApi = {
   async login(credentials: LoginCredentials): Promise<AuthResponse> {
     const response = await apiClient.post('/api/auth/login', credentials);
@@ -40,6 +46,11 @@ export const authApi = {
 
   async getCurrentUser(): Promise<any> {
     const response = await apiClient.get('/api/auth/me');
+    return response.data.data;
+  },
+
+  async updateProfile(data: UpdateProfileData): Promise<any> {
+    const response = await apiClient.put('/api/auth/profile', data);
     return response.data.data;
   },
 };

@@ -9,7 +9,7 @@ React Native mobile application for Magic Chat - TikTok-style video platform.
 - **React Navigation** (Stack + Bottom Tabs)
 - **Zustand** (State Management)
 - **Axios** (API Client)
-- **Expo AV** (Video Player)
+- **Expo Video** (Video Player)
 - **Expo Camera** (Video Recording)
 - **Expo Notifications** (Push Notifications)
 
@@ -108,7 +108,7 @@ The app is configured to work with the Magic Chat Go backend. API endpoints are 
 ## Notes
 
 - All API calls use JWT authentication via AsyncStorage
-- Video player uses Expo AV
+- Video player uses Expo Video
 - Navigation uses React Navigation v6
 - State management with Zustand
 - TypeScript for type safety

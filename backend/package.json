@@ -1,5 +1,12 @@
 {
+  "name": "magicchat-backend",
+  "version": "1.0.0",
+  "scripts": {
+    "seed": "MONGO_URL=mongodb://admin:password@localhost:27017 node migrations/seed_proper.js"
+  },
   "dependencies": {
+    "axios": "^1.12.2",
+    "mongodb": "^6.20.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },

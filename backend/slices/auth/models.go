@@ -38,3 +38,9 @@ type AuthResponse struct {
 	Token string `json:"token"`
 	User  *User  `json:"user"`
 }
+
+type UpdateProfileRequest struct {
+	DisplayName *string `json:"display_name"`
+	Bio         *string `json:"bio"`
+	AvatarURL   *string `json:"avatar_url"`
+}

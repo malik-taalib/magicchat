@@ -89,3 +89,36 @@ func (r *Repository) UsernameExists(ctx context.Context, username string) (bool,
 	}
 	return count > 0, nil
 }
+
+func (r *Repository) UpdateProfile(ctx context.Context, userID string, req *UpdateProfileRequest) (*User, error) {
+	objectID, err := primitive.ObjectIDFromHex(userID)
+	if err != nil {
+		return nil, err
+	}
+
+	update := bson.M{
+		"$set": bson.M{
+			"updated_at": time.Now(),
+		},
+	}
+
+	// Only update fields that are provided
+	if req.DisplayName != nil {
+		update["$set"].(bson.M)["display_name"] = *req.DisplayName
+	}
+	if req.Bio != nil {
+		update["$set"].(bson.M)["bio"] = *req.Bio
+	}
+	if req.AvatarURL != nil {
+		update["$set"].(bson.M)["avatar_url"] = *req.AvatarURL
+	}
+
+	// Update the user
+	_, err = r.collection.UpdateOne(ctx, bson.M{"_id": objectID}, update)
+	if err != nil {
+		return nil, err
+	}
+
+	// Return updated user
+	return r.GetUserByID(ctx, userID)
+}

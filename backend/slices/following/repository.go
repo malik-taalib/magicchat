@@ -14,12 +14,16 @@ import (
 type Repository struct {
 	followCollection *mongo.Collection
 	userCollection   *mongo.Collection
+	likeCollection   *mongo.Collection
+	videoCollection  *mongo.Collection
 }
 
 func NewRepository(db *mongo.Database) *Repository {
 	return &Repository{
 		followCollection: db.Collection("follows"),
 		userCollection:   db.Collection("users"),
+		likeCollection:   db.Collection("likes"),
+		videoCollection:  db.Collection("videos"),
 	}
 }
 
@@ -290,9 +294,12 @@ func (r *Repository) GetUserByID(ctx context.Context, userID primitive.ObjectID)
 		"_id":             1,
 		"username":        1,
 		"display_name":    1,
+		"bio":             1,
 		"avatar_url":      1,
 		"follower_count":  1,
 		"following_count": 1,
+		"video_count":     1,
+		"total_likes":     1,
 	}
 
 	opts := options.FindOne().SetProjection(projection)
@@ -306,4 +313,104 @@ func (r *Repository) GetUserByID(ctx context.Context, userID primitive.ObjectID)
 	}
 
 	return &profile, nil
+}
+
+// GetLikedVideos retrieves videos that a user has liked using MongoDB aggregation
+func (r *Repository) GetLikedVideos(ctx context.Context, userID primitive.ObjectID, limit, offset int64) ([]*FeedVideo, error) {
+	// Aggregation pipeline to join likes with videos and users
+	pipeline := []bson.M{
+		// Match likes for this user
+		{
+			"$match": bson.M{
+				"user_id": userID,
+			},
+		},
+		// Sort by created_at descending (most recent likes first)
+		{
+			"$sort": bson.M{
+				"created_at": -1,
+			},
+		},
+		// Skip for pagination
+		{
+			"$skip": offset,
+		},
+		// Limit results
+		{
+			"$limit": limit,
+		},
+		// Lookup the video details
+		{
+			"$lookup": bson.M{
+				"from":         "videos",
+				"localField":   "video_id",
+				"foreignField": "_id",
+				"as":           "video",
+			},
+		},
+		// Unwind the video array (should be 1 element)
+		{
+			"$unwind": bson.M{
+				"path":                       "$video",
+				"preserveNullAndEmptyArrays": false,
+			},
+		},
+		// Lookup user details for the video
+		{
+			"$lookup": bson.M{
+				"from":         "users",
+				"localField":   "video.user_id",
+				"foreignField": "_id",
+				"as":           "user",
+			},
+		},
+		// Unwind the user array
+		{
+			"$unwind": bson.M{
+				"path":                       "$user",
+				"preserveNullAndEmptyArrays": false,
+			},
+		},
+		// Project to FeedVideo format
+		{
+			"$project": bson.M{
+				"_id":               "$video._id",
+				"user_id":           "$video.user_id",
+				"username":          "$user.username",
+				"display_name":      "$user.display_name",
+				"avatar_url":        "$user.avatar_url",
+				"title":             "$video.title",
+				"description":       "$video.description",
+				"video_url":         "$video.video_url",
+				"thumbnail_url":     "$video.thumbnail_url",
+				"duration":          "$video.duration",
+				"hashtags":          "$video.hashtags",
+				"view_count":        "$video.view_count",
+				"like_count":        "$video.like_count",
+				"comment_count":     "$video.comment_count",
+				"share_count":       "$video.share_count",
+				"processing_status": "$video.processing_status",
+				"created_at":        "$video.created_at",
+				"updated_at":        "$video.updated_at",
+			},
+		},
+	}
+
+	cursor, err := r.likeCollection.Aggregate(ctx, pipeline)
+	if err != nil {
+		return nil, err
+	}
+	defer cursor.Close(ctx)
+
+	var videos []*FeedVideo
+	if err = cursor.All(ctx, &videos); err != nil {
+		return nil, err
+	}
+
+	// Return empty array instead of nil if no results
+	if videos == nil {
+		videos = []*FeedVideo{}
+	}
+
+	return videos, nil
 }

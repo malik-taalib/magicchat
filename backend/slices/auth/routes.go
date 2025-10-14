@@ -16,10 +16,11 @@ func Routes(db *mongo.Database) chi.Router {
 	r.Post("/login", handler.Login)
 	r.Post("/logout", handler.Logout)
 
-	// Protected route
+	// Protected routes
 	r.Group(func(r chi.Router) {
 		r.Use(AuthMiddleware)
 		r.Get("/me", handler.Me)
+		r.Put("/profile", handler.UpdateProfile)
 	})
 
 	return r

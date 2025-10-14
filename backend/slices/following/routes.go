@@ -28,5 +28,11 @@ func Routes(db *mongo.Database) chi.Router {
 	r.Get("/{id}/followers", handler.GetFollowers)
 	r.Get("/{id}/following", handler.GetFollowing)
 
+	// Get user's liked videos
+	r.Get("/{id}/likes", handler.GetLikedVideos)
+
+	// Get user profile
+	r.Get("/{id}", handler.GetUserProfile)
+
 	return r
 }

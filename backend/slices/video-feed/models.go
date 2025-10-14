@@ -8,24 +8,24 @@ import (
 
 // FeedVideo combines video information with user details for feed display
 type FeedVideo struct {
-	ID               primitive.ObjectID `json:"id"`
-	UserID           primitive.ObjectID `json:"user_id"`
-	Username         string             `json:"username"`
-	DisplayName      string             `json:"display_name"`
-	AvatarURL        string             `json:"avatar_url"`
-	Title            string             `json:"title"`
-	Description      string             `json:"description"`
-	VideoURL         string             `json:"video_url"`
-	ThumbnailURL     string             `json:"thumbnail_url"`
-	Duration         int                `json:"duration"`
-	Hashtags         []string           `json:"hashtags"`
-	ViewCount        int                `json:"view_count"`
-	LikeCount        int                `json:"like_count"`
-	CommentCount     int                `json:"comment_count"`
-	ShareCount       int                `json:"share_count"`
-	ProcessingStatus string             `json:"processing_status"`
-	CreatedAt        time.Time          `json:"created_at"`
-	UpdatedAt        time.Time          `json:"updated_at"`
+	ID               primitive.ObjectID `bson:"_id" json:"id"`
+	UserID           primitive.ObjectID `bson:"user_id" json:"user_id"`
+	Username         string             `bson:"username" json:"username"`
+	DisplayName      string             `bson:"display_name" json:"display_name"`
+	AvatarURL        string             `bson:"avatar_url" json:"avatar_url"`
+	Title            string             `bson:"title" json:"title"`
+	Description      string             `bson:"description" json:"description"`
+	VideoURL         string             `bson:"video_url" json:"video_url"`
+	ThumbnailURL     string             `bson:"thumbnail_url" json:"thumbnail_url"`
+	Duration         int                `bson:"duration" json:"duration"`
+	Hashtags         []string           `bson:"hashtags" json:"hashtags"`
+	ViewCount        int                `bson:"view_count" json:"view_count"`
+	LikeCount        int                `bson:"like_count" json:"like_count"`
+	CommentCount     int                `bson:"comment_count" json:"comment_count"`
+	ShareCount       int                `bson:"share_count" json:"share_count"`
+	ProcessingStatus string             `bson:"processing_status" json:"processing_status"`
+	CreatedAt        time.Time          `bson:"created_at" json:"created_at"`
+	UpdatedAt        time.Time          `bson:"updated_at" json:"updated_at"`
 }
 
 // FeedRequest represents pagination parameters for feed requests

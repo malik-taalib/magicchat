@@ -47,31 +47,21 @@ func (r *Repository) LikeVideo(ctx context.Context, userID, videoID primitive.Ob
 		CreatedAt: time.Now(),
 	}
 
-	session, err := r.likesCollection.Database().Client().StartSession()
+	// Insert like
+	_, err = r.likesCollection.InsertOne(ctx, like)
 	if err != nil {
 		return err
 	}
-	defer session.EndSession(ctx)
 
-	// Use transaction to ensure atomicity
-	_, err = session.WithTransaction(ctx, func(sessCtx mongo.SessionContext) (interface{}, error) {
-		// Insert like
-		_, err := r.likesCollection.InsertOne(sessCtx, like)
-		if err != nil {
-			return nil, err
-		}
-
-		// Increment like count on video
-		update := bson.M{
-			"$inc": bson.M{"like_count": 1},
-		}
-		_, err = r.videosCollection.UpdateOne(
-			sessCtx,
-			bson.M{"_id": videoID},
-			update,
-		)
-		return nil, err
-	})
+	// Increment like count on video
+	update := bson.M{
+		"$inc": bson.M{"like_count": 1},
+	}
+	_, err = r.videosCollection.UpdateOne(
+		ctx,
+		bson.M{"_id": videoID},
+		update,
+	)
 
 	return err
 }
@@ -86,37 +76,27 @@ func (r *Repository) UnlikeVideo(ctx context.Context, userID, videoID primitive.
 		return errors.New("video not liked")
 	}
 
-	session, err := r.likesCollection.Database().Client().StartSession()
+	// Delete like
+	_, err = r.likesCollection.DeleteOne(
+		ctx,
+		bson.M{
+			"user_id":  userID,
+			"video_id": videoID,
+		},
+	)
 	if err != nil {
 		return err
 	}
-	defer session.EndSession(ctx)
 
-	// Use transaction to ensure atomicity
-	_, err = session.WithTransaction(ctx, func(sessCtx mongo.SessionContext) (interface{}, error) {
-		// Delete like
-		_, err := r.likesCollection.DeleteOne(
-			sessCtx,
-			bson.M{
-				"user_id":  userID,
-				"video_id": videoID,
-			},
-		)
-		if err != nil {
-			return nil, err
-		}
-
-		// Decrement like count on video
-		update := bson.M{
-			"$inc": bson.M{"like_count": -1},
-		}
-		_, err = r.videosCollection.UpdateOne(
-			sessCtx,
-			bson.M{"_id": videoID},
-			update,
-		)
-		return nil, err
-	})
+	// Decrement like count on video
+	update := bson.M{
+		"$inc": bson.M{"like_count": -1},
+	}
+	_, err = r.videosCollection.UpdateOne(
+		ctx,
+		bson.M{"_id": videoID},
+		update,
+	)
 
 	return err
 }
@@ -150,46 +130,36 @@ func (r *Repository) CreateComment(ctx context.Context, comment *Comment) error 
 		comment.Replies = []primitive.ObjectID{}
 	}
 
-	session, err := r.commentsCollection.Database().Client().StartSession()
+	// Insert comment
+	_, err := r.commentsCollection.InsertOne(ctx, comment)
 	if err != nil {
 		return err
 	}
-	defer session.EndSession(ctx)
 
-	// Use transaction to ensure atomicity
-	_, err = session.WithTransaction(ctx, func(sessCtx mongo.SessionContext) (interface{}, error) {
-		// Insert comment
-		_, err := r.commentsCollection.InsertOne(sessCtx, comment)
-		if err != nil {
-			return nil, err
-		}
-
-		// If this is a reply, add to parent's replies array
-		if comment.ParentID != nil {
-			_, err = r.commentsCollection.UpdateOne(
-				sessCtx,
-				bson.M{"_id": *comment.ParentID},
-				bson.M{
-					"$push": bson.M{"replies": comment.ID},
-					"$set":  bson.M{"updated_at": time.Now()},
-				},
-			)
-			if err != nil {
-				return nil, err
-			}
-		}
-
-		// Increment comment count on video
-		update := bson.M{
-			"$inc": bson.M{"comment_count": 1},
-		}
-		_, err = r.videosCollection.UpdateOne(
-			sessCtx,
-			bson.M{"_id": comment.VideoID},
-			update,
+	// If this is a reply, add to parent's replies array
+	if comment.ParentID != nil {
+		_, err = r.commentsCollection.UpdateOne(
+			ctx,
+			bson.M{"_id": *comment.ParentID},
+			bson.M{
+				"$push": bson.M{"replies": comment.ID},
+				"$set":  bson.M{"updated_at": time.Now()},
+			},
 		)
-		return nil, err
-	})
+		if err != nil {
+			return err
+		}
+	}
+
+	// Increment comment count on video
+	update := bson.M{
+		"$inc": bson.M{"comment_count": 1},
+	}
+	_, err = r.videosCollection.UpdateOne(
+		ctx,
+		bson.M{"_id": comment.VideoID},
+		update,
+	)
 
 	return err
 }
@@ -264,31 +234,21 @@ func (r *Repository) RecordShare(ctx context.Context, userID, videoID primitive.
 		CreatedAt: time.Now(),
 	}
 
-	session, err := r.sharesCollection.Database().Client().StartSession()
+	// Insert share
+	_, err := r.sharesCollection.InsertOne(ctx, share)
 	if err != nil {
 		return err
 	}
-	defer session.EndSession(ctx)
 
-	// Use transaction to ensure atomicity
-	_, err = session.WithTransaction(ctx, func(sessCtx mongo.SessionContext) (interface{}, error) {
-		// Insert share
-		_, err := r.sharesCollection.InsertOne(sessCtx, share)
-		if err != nil {
-			return nil, err
-		}
-
-		// Increment share count on video
-		update := bson.M{
-			"$inc": bson.M{"share_count": 1},
-		}
-		_, err = r.videosCollection.UpdateOne(
-			sessCtx,
-			bson.M{"_id": videoID},
-			update,
-		)
-		return nil, err
-	})
+	// Increment share count on video
+	update := bson.M{
+		"$inc": bson.M{"share_count": 1},
+	}
+	_, err = r.videosCollection.UpdateOne(
+		ctx,
+		bson.M{"_id": videoID},
+		update,
+	)
 
 	return err
 }

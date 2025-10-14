@@ -164,6 +164,66 @@ func (h *Handler) IsFollowing(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+// GetLikedVideos handles GET /:id/likes - gets videos that a user has liked
+func (h *Handler) GetLikedVideos(w http.ResponseWriter, r *http.Request) {
+	// Get user ID from URL parameter
+	userID := chi.URLParam(r, "id")
+	if userID == "" {
+		respondError(w, http.StatusBadRequest, "user ID is required")
+		return
+	}
+
+	// Parse pagination parameters
+	limitStr := r.URL.Query().Get("limit")
+	offsetStr := r.URL.Query().Get("offset")
+
+	limit := int64(20) // Default limit
+	if limitStr != "" {
+		if l, err := strconv.ParseInt(limitStr, 10, 64); err == nil {
+			limit = l
+		}
+	}
+
+	offset := int64(0) // Default offset
+	if offsetStr != "" {
+		if o, err := strconv.ParseInt(offsetStr, 10, 64); err == nil {
+			offset = o
+		}
+	}
+
+	// Get liked videos
+	videos, err := h.service.GetLikedVideos(r.Context(), userID, limit, offset)
+	if err != nil {
+		respondError(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	respondSuccess(w, http.StatusOK, map[string]interface{}{
+		"videos": videos,
+		"limit":  limit,
+		"offset": offset,
+	})
+}
+
+// GetUserProfile handles GET /:id
+func (h *Handler) GetUserProfile(w http.ResponseWriter, r *http.Request) {
+	// Get the user ID from URL parameter
+	userID := chi.URLParam(r, "id")
+	if userID == "" {
+		respondError(w, http.StatusBadRequest, "user ID is required")
+		return
+	}
+
+	// Call service to get user profile
+	profile, err := h.service.GetUserProfile(r.Context(), userID)
+	if err != nil {
+		respondError(w, http.StatusNotFound, err.Error())
+		return
+	}
+
+	respondSuccess(w, http.StatusOK, profile)
+}
+
 // Helper functions
 func respondSuccess(w http.ResponseWriter, status int, data interface{}) {
 	w.Header().Set("Content-Type", "application/json")

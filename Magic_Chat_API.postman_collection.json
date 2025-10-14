@@ -1,0 +1,667 @@
+{
+	"info": {
+		"_postman_id": "magic-chat-api-collection",
+		"name": "Magic Chat API",
+		"description": "Complete API collection for Magic Chat - TikTok-style video platform",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{auth_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "auth_token",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200 || pm.response.code === 201) {",
+									"    const jsonData = pm.response.json();",
+									"    if (jsonData.data && jsonData.data.token) {",
+									"        pm.collectionVariables.set('auth_token', jsonData.data.token);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"testuser\",\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\",\n  \"display_name\": \"Test User\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/register",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "register"]
+						},
+						"description": "Register a new user account"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const jsonData = pm.response.json();",
+									"    if (jsonData.data && jsonData.data.token) {",
+									"        pm.collectionVariables.set('auth_token', jsonData.data.token);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "login"]
+						},
+						"description": "Login with existing credentials"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/auth/logout",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "logout"]
+						},
+						"description": "Logout current user"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Current User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/auth/me",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "me"]
+						},
+						"description": "Get currently authenticated user profile"
+					},
+					"response": []
+				}
+			],
+			"description": "User authentication endpoints"
+		},
+		{
+			"name": "Video Upload",
+			"item": [
+				{
+					"name": "Upload Video",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "video",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "title",
+									"value": "My First Video",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "This is a test video",
+									"type": "text"
+								},
+								{
+									"key": "hashtags",
+									"value": "test,demo,magicchat",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/videos/upload",
+							"host": ["{{base_url}}"],
+							"path": ["api", "videos", "upload"]
+						},
+						"description": "Upload a new video (multipart form data)"
+					},
+					"response": []
+				},
+				{
+					"name": "Process Video (Webhook)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"video_id\": \"video_id_here\",\n  \"status\": \"completed\",\n  \"video_url\": \"https://cdn.example.com/video.mp4\",\n  \"thumbnail_url\": \"https://cdn.example.com/thumb.jpg\",\n  \"duration\": 30\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/videos/process",
+							"host": ["{{base_url}}"],
+							"path": ["api", "videos", "process"]
+						},
+						"description": "Webhook endpoint for video processing completion"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Video Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/videos/:id/status",
+							"host": ["{{base_url}}"],
+							"path": ["api", "videos", ":id", "status"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "video_id_here"
+								}
+							]
+						},
+						"description": "Check video processing status"
+					},
+					"response": []
+				}
+			],
+			"description": "Video upload and processing endpoints"
+		},
+		{
+			"name": "Video Feed",
+			"item": [
+				{
+					"name": "Get For You Feed",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/feed/for-you?cursor=",
+							"host": ["{{base_url}}"],
+							"path": ["api", "feed", "for-you"],
+							"query": [
+								{
+									"key": "cursor",
+									"value": "",
+									"description": "Pagination cursor"
+								}
+							]
+						},
+						"description": "Get personalized For You feed"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Following Feed",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/feed/following?cursor=",
+							"host": ["{{base_url}}"],
+							"path": ["api", "feed", "following"],
+							"query": [
+								{
+									"key": "cursor",
+									"value": "",
+									"description": "Pagination cursor"
+								}
+							]
+						},
+						"description": "Get feed from followed users"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Video By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/videos/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "videos", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "video_id_here"
+								}
+							]
+						},
+						"description": "Get single video details"
+					},
+					"response": []
+				}
+			],
+			"description": "Video feed endpoints"
+		},
+		{
+			"name": "Engagement",
+			"item": [
+				{
+					"name": "Like Video",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/videos/:id/like",
+							"host": ["{{base_url}}"],
+							"path": ["api", "videos", ":id", "like"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "video_id_here"
+								}
+							]
+						},
+						"description": "Like a video"
+					},
+					"response": []
+				},
+				{
+					"name": "Unlike Video",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/videos/:id/like",
+							"host": ["{{base_url}}"],
+							"path": ["api", "videos", ":id", "like"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "video_id_here"
+								}
+							]
+						},
+						"description": "Remove like from a video"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/videos/:id/comments?cursor=",
+							"host": ["{{base_url}}"],
+							"path": ["api", "videos", ":id", "comments"],
+							"query": [
+								{
+									"key": "cursor",
+									"value": "",
+									"description": "Pagination cursor"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "video_id_here"
+								}
+							]
+						},
+						"description": "Get comments for a video"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"text\": \"Great video!\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/videos/:id/comments",
+							"host": ["{{base_url}}"],
+							"path": ["api", "videos", ":id", "comments"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "video_id_here"
+								}
+							]
+						},
+						"description": "Add a comment to a video"
+					},
+					"response": []
+				},
+				{
+					"name": "Share Video",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/videos/:id/share",
+							"host": ["{{base_url}}"],
+							"path": ["api", "videos", ":id", "share"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "video_id_here"
+								}
+							]
+						},
+						"description": "Track video share event"
+					},
+					"response": []
+				}
+			],
+			"description": "Video engagement endpoints (likes, comments, shares)"
+		},
+		{
+			"name": "User Following",
+			"item": [
+				{
+					"name": "Follow User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/users/:id/follow",
+							"host": ["{{base_url}}"],
+							"path": ["api", "users", ":id", "follow"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "user_id_here"
+								}
+							]
+						},
+						"description": "Follow a user"
+					},
+					"response": []
+				},
+				{
+					"name": "Unfollow User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/users/:id/follow",
+							"host": ["{{base_url}}"],
+							"path": ["api", "users", ":id", "follow"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "user_id_here"
+								}
+							]
+						},
+						"description": "Unfollow a user"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Followers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/users/:id/followers?cursor=",
+							"host": ["{{base_url}}"],
+							"path": ["api", "users", ":id", "followers"],
+							"query": [
+								{
+									"key": "cursor",
+									"value": "",
+									"description": "Pagination cursor"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "user_id_here"
+								}
+							]
+						},
+						"description": "Get user's followers list"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Following",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/users/:id/following?cursor=",
+							"host": ["{{base_url}}"],
+							"path": ["api", "users", ":id", "following"],
+							"query": [
+								{
+									"key": "cursor",
+									"value": "",
+									"description": "Pagination cursor"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "user_id_here"
+								}
+							]
+						},
+						"description": "Get list of users that this user follows"
+					},
+					"response": []
+				}
+			],
+			"description": "User following/follower endpoints"
+		},
+		{
+			"name": "Search & Discovery",
+			"item": [
+				{
+					"name": "Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/search?q=test&type=users",
+							"host": ["{{base_url}}"],
+							"path": ["api", "search"],
+							"query": [
+								{
+									"key": "q",
+									"value": "test",
+									"description": "Search query"
+								},
+								{
+									"key": "type",
+									"value": "users",
+									"description": "Type: users, videos, or hashtags"
+								}
+							]
+						},
+						"description": "Search for users, videos, or hashtags"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Trending Hashtags",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/trending/hashtags",
+							"host": ["{{base_url}}"],
+							"path": ["api", "trending", "hashtags"]
+						},
+						"description": "Get trending hashtags"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Videos By Hashtag",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/hashtags/:tag/videos?cursor=",
+							"host": ["{{base_url}}"],
+							"path": ["api", "hashtags", ":tag", "videos"],
+							"query": [
+								{
+									"key": "cursor",
+									"value": "",
+									"description": "Pagination cursor"
+								}
+							],
+							"variable": [
+								{
+									"key": "tag",
+									"value": "trending"
+								}
+							]
+						},
+						"description": "Get videos for a specific hashtag"
+					},
+					"response": []
+				}
+			],
+			"description": "Search and discovery endpoints"
+		},
+		{
+			"name": "Notifications",
+			"item": [
+				{
+					"name": "Get Notifications",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/notifications?cursor=",
+							"host": ["{{base_url}}"],
+							"path": ["api", "notifications"],
+							"query": [
+								{
+									"key": "cursor",
+									"value": "",
+									"description": "Pagination cursor"
+								}
+							]
+						},
+						"description": "Get user notifications"
+					},
+					"response": []
+				},
+				{
+					"name": "Mark Notification as Read",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/notifications/:id/read",
+							"host": ["{{base_url}}"],
+							"path": ["api", "notifications", ":id", "read"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "notification_id_here"
+								}
+							]
+						},
+						"description": "Mark a notification as read"
+					},
+					"response": []
+				},
+				{
+					"name": "Notifications WebSocket",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Upgrade",
+								"value": "websocket"
+							},
+							{
+								"key": "Connection",
+								"value": "Upgrade"
+							}
+						],
+						"url": {
+							"raw": "ws://localhost:8080/api/notifications/stream",
+							"protocol": "ws",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "notifications", "stream"]
+						},
+						"description": "WebSocket endpoint for real-time notifications (use a WebSocket client)"
+					},
+					"response": []
+				}
+			],
+			"description": "Notification endpoints"
+		}
+	]
+}
